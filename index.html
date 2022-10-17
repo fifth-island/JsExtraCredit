@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- embed jquery library -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+     <title>Extra Credit</title>
+ 
+  </head>
+  <body>
+   <h1>PART 1: </h1>
+   
+   <!-- framework of the chatboxes -->
+   <div>
+    <input id="left-box" type="text">
+    <button id="swap">JUMP ></button> 
+    <input id="right-box" type="text">
+   </div>
+
+   <script>
+    
+     const left_box = document.getElementById("left-box");
+     const right_box = document.getElementById("right-box");
+     const button = document.getElementById("swap");
+
+    // EventListener to react as the button is pressed
+     button.addEventListener("click", ()=> {
+     if (button.innerText == "JUMP >") {
+      button.innerText = "< JUMP";
+      help_left();
+     } else if (button.innerText == "< JUMP") {
+      button.innerText= "JUMP >";
+      help_right();
+     }
+    });
+
+    
+    function help_left() {
+     var left = left_box.value;
+     var right = right_box.value;
+
+     left_box.value = right;
+     right_box.value = left;
+
+     }
+
+     function help_right() {
+     var left = left_box.value;
+     var right = right_box.value;
+
+     left_box.value = right;
+     right_box.value = left;
+
+     }
+   </script>
+
+   <h1>PART 2: </h1>
+
+   <script>
+    function check() {
+     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes[1].checked = checkboxes[0].checked;
+        checkboxes[2].checked = checkboxes[0].checked;
+        checkboxes[3].checked = checkboxes[0].checked;
+        checkboxes[4].checked = checkboxes[0].checked;
+
+     change();
+    }
+
+    function change() {
+     
+     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+     var label = document.getElementById("mainlabel");
+
+
+     if (checkboxes[0].checked == false) {
+       label.innerText = "Check All";
+     } else {
+       label.innerText = "Uncheck All";
+     }
+
+    }
+    function optional() {
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+      if (checkboxes[0].checked == true) {
+       checkboxes[0].checked = false;
+       change();
+      } else if (checkboxes[1].checked == true && checkboxes[2].checked == true && checkboxes[3].checked == true && checkboxes[4].checked == true) {
+       checkboxes[0].checked = true;
+       change();
+      }
+    }
+   </script>
+
+   <input type="checkbox" id="marker" label="main" onclick="check();"/> 
+   <label id="mainlabel" for="main">Check All</label>
+   <br>
+
+   <input class="options" type="checkbox" onclick="optional();" />First<br />
+   <input class="options" type="checkbox" onclick="optional();" />Second<br />
+   <input class="options" type="checkbox" onclick="optional();" />Third<br /> 
+   <input class="options" type="checkbox" onclick="optional();" />Fourth<br /> 
+
+   <h1>PART 3: </h1>
+
+<script>   
+   var img = new Array("images/image1.png", "images/image2.png", "images/image3.png", "images/image4.png", "images/image5.png");
+   
+   var imgNumber = 0;
+   var imgLength = img.length - 1;
+   var Interval;
+
+   function change_image(num) {
+    imgNumber = imgNumber + num;
+
+    if (imgNumber > imgLength) {
+     imgNumber = 0;
+    }
+    if (imgNumber < 0) {
+     imgNumber = imgLength;
+    }
+
+    $("#slideshow").fadeOut('slow', function () {
+     $(this).attr('src', img[imgNumber]);
+    }).fadeIn('slow');
+
+    return false;
+   }
+
+   function play() {
+    Interval = setInterval("change_image(1)", 2000);
+   }
+
+   function stop() {
+    clearInterval(Interval);
+   }
+
+  </script>
+  </body>
+
+
+   <div class="slides">
+   <img id="slideshow" name = slide src="images/image1.png"> <br>    
+   <button id="stop" onclick="stop();">Stop</button>
+   <button id="play" onclick="play();">Start</button>
+   </div>
+  
+</html>
